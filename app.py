@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
 
@@ -13,11 +14,11 @@ def recevoir_idee_video():
     print(f"🎬 Nouvelle idée reçue : {titre} | Format : {format_video}")
     print(f"Résumé : {resume}")
 
-    # Ici, tu pourras plus tard ajouter une étape pour stocker ou déclencher autre chose
     return jsonify({
         "status": "OK",
         "message": "Idée reçue. Prête pour génération de scène ou prompt."
     })
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
